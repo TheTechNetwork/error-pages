@@ -27,11 +27,9 @@ func TestServer_RotationModeDisabled(t *testing.T) {
 	)
 
 	// Setup multiple templates
-	cfg.Templates = config.Templates{
-		"template1": "<html><body>Template 1: {{.Code}}</body></html>",
-		"template2": "<html><body>Template 2: {{.Code}}</body></html>",
-		"template3": "<html><body>Template 3: {{.Code}}</body></html>",
-	}
+	_ = cfg.Templates.Add("template1", "<html><body>Template 1: {{.Code}}</body></html>")
+	_ = cfg.Templates.Add("template2", "<html><body>Template 2: {{.Code}}</body></html>")
+	_ = cfg.Templates.Add("template3", "<html><body>Template 3: {{.Code}}</body></html>")
 	cfg.TemplateName = "template1"
 	cfg.RotationMode = config.RotationModeDisabled
 
@@ -82,11 +80,9 @@ func TestServer_RotationModeRandomOnEachRequest(t *testing.T) {
 	)
 
 	// Setup multiple templates
-	cfg.Templates = config.Templates{
-		"template1": "<html><body>Template 1: {{.Code}}</body></html>",
-		"template2": "<html><body>Template 2: {{.Code}}</body></html>",
-		"template3": "<html><body>Template 3: {{.Code}}</body></html>",
-	}
+	_ = cfg.Templates.Add("template1", "<html><body>Template 1: {{.Code}}</body></html>")
+	_ = cfg.Templates.Add("template2", "<html><body>Template 2: {{.Code}}</body></html>")
+	_ = cfg.Templates.Add("template3", "<html><body>Template 3: {{.Code}}</body></html>")
 	cfg.TemplateName = "template1" // Initial template
 	cfg.RotationMode = config.RotationModeRandomOnEachRequest
 
@@ -157,11 +153,9 @@ func TestServer_RotationModeRandomOnStartup(t *testing.T) {
 	)
 
 	// Setup multiple templates
-	cfg.Templates = config.Templates{
-		"template1": "<html><body>Template 1: {{.Code}}</body></html>",
-		"template2": "<html><body>Template 2: {{.Code}}</body></html>",
-		"template3": "<html><body>Template 3: {{.Code}}</body></html>",
-	}
+	_ = cfg.Templates.Add("template1", "<html><body>Template 1: {{.Code}}</body></html>")
+	_ = cfg.Templates.Add("template2", "<html><body>Template 2: {{.Code}}</body></html>")
+	_ = cfg.Templates.Add("template3", "<html><body>Template 3: {{.Code}}</body></html>")
 	cfg.RotationMode = config.RotationModeRandomOnStartup
 
 	// Start multiple servers and track which template each picks
@@ -231,10 +225,8 @@ func TestServer_TemplateRotationWithCache(t *testing.T) {
 		port = getFreeTCPPort(t)
 	)
 
-	cfg.Templates = config.Templates{
-		"template1": "<html><body>Template 1: {{.Code}}</body></html>",
-		"template2": "<html><body>Template 2: {{.Code}}</body></html>",
-	}
+	_ = cfg.Templates.Add("template1", "<html><body>Template 1: {{.Code}}</body></html>")
+	_ = cfg.Templates.Add("template2", "<html><body>Template 2: {{.Code}}</body></html>")
 	cfg.RotationMode = config.RotationModeRandomOnEachRequest
 
 	var server = http.NewServer(log, 4096)
@@ -273,11 +265,9 @@ func TestServer_MultipleTemplateSizes(t *testing.T) {
 	)
 
 	// Create templates of varying sizes
-	cfg.Templates = config.Templates{
-		"small":  "<html><body>{{.Code}}</body></html>",
-		"medium": "<html><head><title>Error</title></head><body><h1>Error {{.Code}}</h1><p>Description: {{.Description}}</p></body></html>",
-		"large":  "<html><head><title>Error</title></head><body><h1>Error {{.Code}}</h1>" + createLargeContent(1000) + "</body></html>",
-	}
+	_ = cfg.Templates.Add("small", "<html><body>{{.Code}}</body></html>")
+	_ = cfg.Templates.Add("medium", "<html><head><title>Error</title></head><body><h1>Error {{.Code}}</h1><p>Description: {{.Description}}</p></body></html>")
+	_ = cfg.Templates.Add("large", "<html><head><title>Error</title></head><body><h1>Error {{.Code}}</h1>"+createLargeContent(1000)+"</body></html>")
 	cfg.RotationMode = config.RotationModeRandomOnEachRequest
 
 	var server = http.NewServer(log, 4096)
@@ -320,9 +310,7 @@ func TestServer_RotationWithSingleTemplate(t *testing.T) {
 		port = getFreeTCPPort(t)
 	)
 
-	cfg.Templates = config.Templates{
-		"only": "<html><body>Only Template: {{.Code}}</body></html>",
-	}
+	_ = cfg.Templates.Add("only", "<html><body>Only Template: {{.Code}}</body></html>")
 	cfg.TemplateName = "only"
 	cfg.RotationMode = config.RotationModeRandomOnEachRequest
 
@@ -370,10 +358,8 @@ func TestServer_RotationWithDifferentErrorCodes(t *testing.T) {
 		port = getFreeTCPPort(t)
 	)
 
-	cfg.Templates = config.Templates{
-		"template1": "<html><body>T1-{{.Code}}</body></html>",
-		"template2": "<html><body>T2-{{.Code}}</body></html>",
-	}
+	_ = cfg.Templates.Add("template1", "<html><body>T1-{{.Code}}</body></html>")
+	_ = cfg.Templates.Add("template2", "<html><body>T2-{{.Code}}</body></html>")
 	cfg.RotationMode = config.RotationModeRandomOnEachRequest
 
 	var server = http.NewServer(log, 4096)

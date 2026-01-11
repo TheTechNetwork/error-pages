@@ -1,7 +1,6 @@
 package http_test
 
 import (
-	"context"
 	"fmt"
 	"io"
 	"net"
@@ -25,9 +24,8 @@ func TestServer_FullLifecycle(t *testing.T) {
 	t.Parallel()
 
 	var (
-		log  = logger.NewNop()
-		cfg  = config.New()
-		port = getFreeTCPPort(t)
+		log = logger.NewNop()
+		cfg = config.New()
 	)
 
 	t.Run("server starts, handles requests, and shuts down gracefully", func(t *testing.T) {
