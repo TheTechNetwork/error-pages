@@ -59,7 +59,7 @@ Download the latest binary file for your OS/architecture from the [releases page
 
 | Registry                          | Image                             |
 |-----------------------------------|-----------------------------------|
-| [GitHub Container Registry][ghcr] | `ghcr.io/tarampampam/error-pages` |
+| [GitHub Container Registry][ghcr] | `ghcr.io/thetechnetwork/error-pages` |
 
 > [!IMPORTANT]
 > Using the `latest` tag for the Docker image is highly discouraged due to potential backward-incompatible changes
@@ -137,7 +137,7 @@ server with the following command:
 ```bash
 $ ./error-pages serve
 # --- or ---
-$ docker run --rm -p '8080:8080/tcp' ghcr.io/tarampampam/error-pages serve
+$ docker run --rm -p '8080:8080/tcp' ghcr.io/thetechnetwork/error-pages serve
 ```
 
 That's it! The server will begin running and listen on address `0.0.0.0` and port `8080`. Access error pages using
@@ -192,7 +192,7 @@ And simply start the server with the following command:
 ```bash
 $ docker run --rm \
   -v "$(pwd)/my-super-theme.html:/opt/my-template.html:ro" \
-  -p '8080:8080/tcp' ghcr.io/tarampampam/error-pages:3 serve \
+  -p '8080:8080/tcp' ghcr.io/thetechnetwork/error-pages:3 serve \
     --add-template /opt/my-template.html \
     --template-name my-template
 # --- or ---
@@ -332,7 +332,7 @@ COPY --chown=nginx ./nginx.conf /etc/nginx/conf.d/default.conf
 # copy statically built error pages from the error-pages image
 # (instead of `ghost` you may use any other template)
 COPY --chown=nginx \
-     --from=ghcr.io/tarampampam/error-pages:3 \
+     --from=ghcr.io/thetechnetwork/error-pages:3 \
      /opt/html/ghost /usr/share/nginx/errorpages/_error-pages
 ```
 
@@ -385,7 +385,7 @@ services:
       error-pages: {condition: service_healthy}
 
   error-pages:
-    image: ghcr.io/tarampampam/error-pages:3 # using the latest tag is highly discouraged
+    image: ghcr.io/thetechnetwork/error-pages:3 # using the latest tag is highly discouraged
     environment:
       TEMPLATE_NAME: l7 # set the error pages template
     labels:
@@ -441,7 +441,7 @@ controller:
 defaultBackend:
   enabled: true
   image:
-    repository: ghcr.io/tarampampam/error-pages
+    repository: ghcr.io/thetechnetwork/error-pages
     tag: '3' # using the latest tag is highly discouraged
   extraEnvs:
   - name: TEMPLATE_NAME # Optional: change the default theme
@@ -518,7 +518,7 @@ spec:
       automountServiceAccountToken: false
       containers:
         - name: "{{ .appName }}"
-          image: "ghcr.io/tarampampam/error-pages:{{ .version | default "latest" }}"
+          image: "ghcr.io/thetechnetwork/error-pages:{{ .version | default "latest" }}"
           env:
             - {name: TEMPLATE_NAME, value: "{{ .themeName | default "app-down" }}"}
           securityContext:
