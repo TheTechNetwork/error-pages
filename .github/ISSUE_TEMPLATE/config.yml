@@ -5,7 +5,7 @@ blank_issues_enabled: false
 
 contact_links:
   - name: 🗣 Ask a Question, Discuss
-    url: https://github.com/tarampampam/error-pages/discussions
+    url: https://github.com/TheTechNetwork/error-pages/discussions
     about: Feel free to ask anything
 
   - name: 🌀 I have a question about Traefik..

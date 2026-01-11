@@ -49,9 +49,9 @@ LABEL \
     # docs: https://github.com/opencontainers/image-spec/blob/master/annotations.md
     org.opencontainers.image.title="error-pages" \
     org.opencontainers.image.description="Pretty server's error pages" \
-    org.opencontainers.image.url="https://github.com/tarampampam/error-pages" \
-    org.opencontainers.image.source="https://github.com/tarampampam/error-pages" \
-    org.opencontainers.image.vendor="tarampampam" \
+    org.opencontainers.image.url="https://github.com/TheTechNetwork/error-pages" \
+    org.opencontainers.image.source="https://github.com/TheTechNetwork/error-pages" \
+    org.opencontainers.image.vendor="TheTechNetwork" \
     org.opencontainers.version="$APP_VERSION" \
     org.opencontainers.image.licenses="MIT"
 
@@ -64,7 +64,7 @@ USER 10001:10001
 WORKDIR /opt
 
 # to find out which environment variables and CLI arguments are supported by the application, run the app
-# with the `--help` flag or refer to the documentation at https://github.com/tarampampam/error-pages#readme
+# with the `--help` flag or refer to the documentation at https://github.com/TheTechNetwork/error-pages#readme
 
 ENV LOG_LEVEL="warn" \
     LOG_FORMAT="json"
