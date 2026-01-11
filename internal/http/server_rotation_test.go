@@ -1,4 +1,5 @@
 package http_test
+//nolint:wsl_v5 // Whitespace linter disabled for test file readability
 
 import (
 	"fmt"

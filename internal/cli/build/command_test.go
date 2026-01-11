@@ -1,4 +1,5 @@
 package build_test
+//nolint:wsl_v5 // Whitespace linter disabled for test file readability
 
 import (
 	"context"
@@ -169,7 +170,7 @@ func TestCommand_Run_CustomTemplates(t *testing.T) {
 		// Create a custom template file
 		customTplPath := filepath.Join(testDir, "custom.html")
 		customContent := `<!DOCTYPE html><html><body><h1>Error {{.Code}}</h1></body></html>`
-		require.NoError(t, os.WriteFile(customTplPath, []byte(customContent), 0644))
+		require.NoError(t, os.WriteFile(customTplPath, []byte(customContent), 0600))
 
 		var outDir = filepath.Join(testDir, "out")
 		require.NoError(t, os.Mkdir(outDir, 0755))
@@ -233,8 +234,10 @@ func TestCommand_Run_CustomTemplates(t *testing.T) {
 
 		// Get all template names and disable them all
 		cfg := config.New()
-		var disableArgs []string
-		for _, name := range cfg.Templates.Names() {
+		templateNames := cfg.Templates.Names()
+		disableArgs := make([]string, 0, len(templateNames)*2)
+
+		for _, name := range templateNames {
 			disableArgs = append(disableArgs, "--disable-template", name)
 		}
 
@@ -433,7 +436,7 @@ func TestCommand_Run_ErrorHandling(t *testing.T) {
 
 		var testDir = t.TempDir()
 		filePath := filepath.Join(testDir, "not-a-dir.txt")
-		require.NoError(t, os.WriteFile(filePath, []byte("test"), 0644))
+		require.NoError(t, os.WriteFile(filePath, []byte("test"), 0600))
 
 		cmd := build.NewCommand(log)
 		err := cmd.Run(ctx, []string{
@@ -695,11 +698,11 @@ func TestCommand_Run_DirectoryCreation(t *testing.T) {
 
 		// Create a custom template file
 		customTplPath := filepath.Join(testDir, "mytemplate.html")
-		require.NoError(t, os.WriteFile(customTplPath, []byte(`<html><body>Test</body></html>`), 0644))
+		require.NoError(t, os.WriteFile(customTplPath, []byte(`<html><body>Test</body></html>`), 0600))
 
 		// Create a file with the same name as the template (without extension)
 		conflictFile := filepath.Join(testDir, "mytemplate")
-		require.NoError(t, os.WriteFile(conflictFile, []byte("conflict"), 0644))
+		require.NoError(t, os.WriteFile(conflictFile, []byte("conflict"), 0600))
 
 		cmd := build.NewCommand(log)
 		err := cmd.Run(ctx, []string{
@@ -749,7 +752,7 @@ func TestCommand_Run_CombinedFlags(t *testing.T) {
 
 		// Create a custom template
 		customTplPath := filepath.Join(testDir, "custom.html")
-		require.NoError(t, os.WriteFile(customTplPath, []byte(`<!DOCTYPE html><html><body>{{.Code}}</body></html>`), 0644))
+		require.NoError(t, os.WriteFile(customTplPath, []byte(`<!DOCTYPE html><html><body>{{.Code}}</body></html>`), 0600))
 
 		var outDir = filepath.Join(testDir, "out")
 		require.NoError(t, os.Mkdir(outDir, 0755))
