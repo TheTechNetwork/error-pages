@@ -11,8 +11,6 @@
   <a href="#"><img src="https://img.shields.io/github/go-mod/go-version/tarampampam/error-pages?longCache=true&label=&logo=go&logoColor=white&style=flat-square" alt="" /></a>
   <a href="https://github.com/tarampampam/error-pages/actions"><img src="https://img.shields.io/github/actions/workflow/status/tarampampam/error-pages/tests.yml?branch=master&maxAge=30&label=tests&logo=github&style=flat-square" alt="" /></a>
   <a href="https://github.com/tarampampam/error-pages/actions"><img src="https://img.shields.io/github/actions/workflow/status/tarampampam/error-pages/release.yml?maxAge=30&label=release&logo=github&style=flat-square" alt="" /></a>
-  <a href="https://hub.docker.com/r/tarampampam/error-pages"><img src="https://img.shields.io/docker/pulls/tarampampam/error-pages.svg?maxAge=30&label=pulls&logo=docker&logoColor=white&style=flat-square" alt="" /></a>
-  <a href="https://hub.docker.com/r/tarampampam/error-pages"><img src="https://img.shields.io/docker/image-size/tarampampam/error-pages/latest?maxAge=30&label=size&logo=docker&logoColor=white&style=flat-square" alt="" /></a>
   <a href="https://github.com/tarampampam/error-pages/blob/master/LICENSE"><img src="https://img.shields.io/github/license/tarampampam/error-pages.svg?maxAge=30&style=flat-square" alt="" /></a>
 </p>
 
@@ -62,7 +60,6 @@ Download the latest binary file for your OS/architecture from the [releases page
 | Registry                          | Image                             |
 |-----------------------------------|-----------------------------------|
 | [GitHub Container Registry][ghcr] | `ghcr.io/tarampampam/error-pages` |
-| [Docker Hub][docker-hub] (mirror) | `tarampampam/error-pages`         |
 
 > [!IMPORTANT]
 > Using the `latest` tag for the Docker image is highly discouraged due to potential backward-incompatible changes
@@ -72,7 +69,6 @@ Download the latest binary file for your OS/architecture from the [releases page
 [tar.gz][pages-pack-tar-gz] archive.
 
 [latest-release]:https://github.com/tarampampam/error-pages/releases/latest
-[docker-hub]:https://hub.docker.com/r/tarampampam/error-pages
 [ghcr]:https://github.com/tarampampam/error-pages/pkgs/container/error-pages
 [pages-pack-zip]:https://github.com/tarampampam/error-pages/zipball/gh-pages/
 [pages-pack-tar-gz]:https://github.com/tarampampam/error-pages/tarball/gh-pages/
@@ -141,7 +137,7 @@ server with the following command:
 ```bash
 $ ./error-pages serve
 # --- or ---
-$ docker run --rm -p '8080:8080/tcp' tarampampam/error-pages serve
+$ docker run --rm -p '8080:8080/tcp' ghcr.io/tarampampam/error-pages serve
 ```
 
 That's it! The server will begin running and listen on address `0.0.0.0` and port `8080`. Access error pages using
