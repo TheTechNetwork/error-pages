@@ -11,6 +11,15 @@ build: gen ## Build the application
 test: ## Run tests
 	go test -race ./...
 
+coverage: ## Run tests with coverage report
+	go test -race -coverprofile=coverage.out -covermode=atomic ./...
+	go tool cover -html=coverage.out -o coverage.html
+	@echo "\nCoverage report generated: coverage.html"
+	@echo "Opening coverage report in browser..."
+	@go tool cover -html=coverage.out
+	@echo "\nCoverage summary:"
+	@go tool cover -func=coverage.out | tail -1
+
 lint: ## Run linters (requires https://github.com/golangci/golangci-lint installed)
 	golangci-lint run
 
