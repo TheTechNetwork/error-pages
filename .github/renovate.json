@@ -9,16 +9,24 @@
     "dockerfile",
     "github-actions"
   ],
+  "rangeStrategy": "pin",
   "packageRules": [
     {
-      "description": "Group Go dependencies",
+      "description": "Pin Go dependencies to exact versions",
       "matchManagers": ["gomod"],
-      "groupName": "Go dependencies"
+      "groupName": "Go dependencies",
+      "rangeStrategy": "pin"
     },
     {
-      "description": "Group GitHub Actions updates",
+      "description": "Pin GitHub Actions to exact commit SHAs",
       "matchManagers": ["github-actions"],
-      "groupName": "GitHub Actions"
+      "groupName": "GitHub Actions",
+      "pinDigests": true
+    },
+    {
+      "description": "Pin Docker images to exact digests",
+      "matchManagers": ["dockerfile"],
+      "pinDigests": true
     }
   ],
   "golang": {
