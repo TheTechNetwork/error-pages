@@ -18,7 +18,7 @@
       "rangeStrategy": "pin"
     },
     {
-      "description": "Pin GitHub Actions to exact commit SHAs",
+      "description": "Pin GitHub Actions to exact commit SHAs with version comments",
       "matchManagers": ["github-actions"],
       "groupName": "GitHub Actions",
       "pinDigests": true
