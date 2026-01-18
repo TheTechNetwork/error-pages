@@ -1,7 +1,29 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "github>tarampampam/.github//renovate/default",
+    "config:recommended",
     ":rebaseStalePrs"
-  ]
+  ],
+  "enabledManagers": [
+    "gomod",
+    "dockerfile",
+    "github-actions"
+  ],
+  "packageRules": [
+    {
+      "description": "Group Go dependencies",
+      "matchManagers": ["gomod"],
+      "groupName": "Go dependencies"
+    },
+    {
+      "description": "Group GitHub Actions updates",
+      "matchManagers": ["github-actions"],
+      "groupName": "GitHub Actions"
+    }
+  ],
+  "golang": {
+    "minimumReleaseAge": "3 days"
+  },
+  "schedule": ["before 6am on Monday"],
+  "timezone": "UTC"
 }
