@@ -93,7 +93,7 @@ jobs:
           platforms: linux/amd64,linux/arm/v7,linux/arm64/v8
           build-args: "APP_VERSION=${{ steps.slug.outputs.version }}"
           tags: |
-            ghcr.io/${{ steps.repo.outputs.owner }}/${{ github.event.repository.name }}:latest
-            ghcr.io/${{ steps.repo.outputs.owner }}/${{ github.event.repository.name }}:${{ steps.slug.outputs.version }}
-            ghcr.io/${{ steps.repo.outputs.owner }}/${{ github.event.repository.name }}:${{ steps.slug.outputs.version-major }}.${{ steps.slug.outputs.version-minor }}
-            ghcr.io/${{ steps.repo.outputs.owner }}/${{ github.event.repository.name }}:${{ steps.slug.outputs.version-major }}
+            ghcr.io/thetechnetwork/${{ github.event.repository.name }}:latest
+            ghcr.io/thetechnetwork/${{ github.event.repository.name }}:${{ steps.slug.outputs.version }}
+            ghcr.io/thetechnetwork/${{ github.event.repository.name }}:${{ steps.slug.outputs.version-major }}.${{ steps.slug.outputs.version-minor }}
+            ghcr.io/thetechnetwork/${{ github.event.repository.name }}:${{ steps.slug.outputs.version-major }}
