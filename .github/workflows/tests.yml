@@ -27,7 +27,7 @@ jobs:
     name: Run golangci-lint
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
       - {uses: actions/setup-go@v6, with: {go-version-file: go.mod}}
       - uses: golangci/golangci-lint-action@1e7e51e771db61008b38414a730f564565cf7c20 # v9
 
@@ -35,7 +35,7 @@ jobs:
     name: Unit tests
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
       - {uses: actions/setup-go@v6, with: {go-version-file: go.mod}}
       - run: go test -race ./...
 
@@ -49,7 +49,7 @@ jobs:
         arch: [amd64, arm64] # 386
     needs: [golangci-lint, go-test]
     steps:
-      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
       - {uses: actions/setup-go@v6, with: {go-version-file: go.mod}}
       - {uses: gacts/github-slug@v1, id: slug}
       - env:
@@ -81,9 +81,9 @@ jobs:
     runs-on: ubuntu-24.04
     needs: [golangci-lint, go-test]
     steps:
-      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
       - {uses: gacts/github-slug@v1, id: slug}
-      - uses: docker/build-push-action@263435318d21b8e681c14492fe198d362a7d2c83 # v6
+      - uses: docker/build-push-action@10e90e3645eae34f1e60eeb005ba3a3d33f178e8 # v6
         with:
           context: .
           file: Dockerfile
