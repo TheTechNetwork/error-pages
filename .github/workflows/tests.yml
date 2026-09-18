@@ -18,30 +18,30 @@ concurrency:
 jobs:
   gitleaks:
     name: Check for GitLeaks
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     steps:
       - {uses: actions/checkout@v4, with: {fetch-depth: 0}}
       - uses: gacts/gitleaks@9d471d3bda7ee95b6fa416fdfe7e87cf393554d5 # v1
 
   golangci-lint:
     name: Run golangci-lint
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     steps:
-      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
       - {uses: actions/setup-go@v6, with: {go-version-file: go.mod}}
       - uses: golangci/golangci-lint-action@1e7e51e771db61008b38414a730f564565cf7c20 # v9
 
   go-test:
     name: Unit tests
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     steps:
-      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
       - {uses: actions/setup-go@v6, with: {go-version-file: go.mod}}
       - run: go test -race ./...
 
   build:
     name: Build for ${{ matrix.os }} (${{ matrix.arch }})
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     strategy:
       fail-fast: false
       matrix:
@@ -49,7 +49,7 @@ jobs:
         arch: [amd64, arm64] # 386
     needs: [golangci-lint, go-test]
     steps:
-      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
       - {uses: actions/setup-go@v6, with: {go-version-file: go.mod}}
       - {uses: gacts/github-slug@v1, id: slug}
       - env:
@@ -78,12 +78,12 @@ jobs:
 
   docker-image:
     name: Build the docker image
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     needs: [golangci-lint, go-test]
     steps:
-      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
       - {uses: gacts/github-slug@v1, id: slug}
-      - uses: docker/build-push-action@263435318d21b8e681c14492fe198d362a7d2c83 # v6
+      - uses: docker/build-push-action@c3c9e263c25d99ce0380d002d59b67737d91b0dc # v7
         with:
           context: .
           file: Dockerfile
